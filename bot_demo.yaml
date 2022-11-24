@@ -1,0 +1,17 @@
+# 机器人账号配置
+bot:
+  uin: 1234567
+  password: ""
+
+resources_file_path: "res/resources.json"
+
+# 主人(可用于测试)
+master:
+  uin: 123456
+  salutation: "master~"
+  greeting_text: "该起床了喵。"
+
+# 天气接口配置
+weather_api:
+  key: "" # 高德 key
+  city_code: "" # adcode

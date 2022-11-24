@@ -1,0 +1,8 @@
+bot.yaml
+.env
+device.json
+*.token
+qrcode.png
+*.exe
+*.log
+resources.json

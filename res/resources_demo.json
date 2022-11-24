@@ -1,0 +1,40 @@
+{
+    "values": {
+        "strings": [
+            {
+                "id": "weather_report_template",
+                "value": "modules/libs/weather/weather_report.tmpl"
+            }
+        ],
+        "numbers": [
+            {
+                "id": "",
+                "value": 12345
+            }
+        ]
+    },
+    "groups": [
+        {
+            "id": "placeholder_group",
+            "code": 12345
+        }
+    ],
+    "crons": [
+        {
+            "id": "heartbeat_to_master",
+            "cron": "0 0/55 * * * ?"
+        },
+        {
+            "id": "daily_weather_report",
+            "cron": "0 30 7 * * ?"
+        },
+        {
+            "id": "daily_wakeup",
+            "cron": "0 30 6 * * ?"
+        },
+        {
+            "id": "daily_wake_up",
+            "cron": "0 40 6 * * ?"
+        }
+    ]
+}

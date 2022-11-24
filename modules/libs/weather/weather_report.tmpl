@@ -1,0 +1,7 @@
+哎……? 天气吗……
+我看看……
+{{range .Forecasts}}
+{{.Province}}省{{.City}}:
+{{range .Casts}}{{.Date}} 星期 {{.Week}}，早晨{{.Dayweather}} {{.Daytemp}}℃，夜晚{{.Nightweather}} {{.Nighttemp}}℃
+{{end}}{{end}}
+以上跌丝! \(^o^)/~
