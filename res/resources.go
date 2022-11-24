@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io"
 	"os"
+	"sync"
 
 	"github.com/sslime336/awbot/config"
 	"github.com/sslime336/awbot/utils"
@@ -39,10 +40,39 @@ func mapping() {
 
 	lazyInitM()
 
-	mapString()
-	mapNumber()
-	mapGroup()
-	mapCron()
+	var wg *sync.WaitGroup
+	wg.Add(4)
+
+	// crons
+	go func() {
+		for _, cron := range R.Crons {
+			M.Cron[cron.ID] = cron.Cron
+		}
+		wg.Done()
+	}()
+	// groups
+	go func() {
+		for _, group := range R.Groups {
+			M.Group[group.ID] = group.Code
+		}
+		wg.Done()
+	}()
+	// numbers
+	go func() {
+		for _, num := range R.Values.Numbers {
+			M.Number[num.ID] = num.Value
+		}
+		wg.Done()
+	}()
+	// strings
+	go func() {
+		for _, str := range R.Values.Strings {
+			M.String[str.ID] = str.Value
+		}
+		wg.Done()
+	}()
+
+	wg.Wait()
 }
 
 func lazyInitM() {
@@ -54,30 +84,6 @@ func lazyInitM() {
 	M.Number = make(map[string]int64, 5)
 	M.Group = make(map[string]int64, 3)
 	M.Cron = make(map[string]string, 5)
-}
-
-func mapCron() {
-	for _, cron := range R.Crons {
-		M.Cron[cron.ID] = cron.Cron
-	}
-}
-
-func mapGroup() {
-	for _, group := range R.Groups {
-		M.Group[group.ID] = group.Code
-	}
-}
-
-func mapNumber() {
-	for _, num := range R.Values.Numbers {
-		M.Number[num.ID] = num.Value
-	}
-}
-
-func mapString() {
-	for _, str := range R.Values.Strings {
-		M.String[str.ID] = str.Value
-	}
 }
 
 type EntityMap struct {
